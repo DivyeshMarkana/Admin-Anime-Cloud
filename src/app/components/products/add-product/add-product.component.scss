@@ -1,0 +1,229 @@
+.mat-dialog-container {
+    padding: 0% !important;
+}
+
+::ng-deep #product-dialog {
+    .mat-dialog-container {
+        padding: 0% !important;
+    }
+
+    // .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    //     border-top-left-radius: 0px !important;
+    //     border-top-right-radius: 0px !important;
+    //     border-bottom-right-radius: 0px !important;
+    //     border-bottom-left-radius: 0px !important;
+    // }
+
+    .mat-form-field-outline-start {
+        // border-color: var(--primary-green-light);
+        // border-radius: 15px !important;
+        border: 0px !important;
+    }
+
+    .mat-form-field-outline-gap {
+        // border-color: var(--primary-green-light);
+        // border-radius: 15px !important;
+        border: 0px !important;
+    }
+
+    .mat-form-field-outline-end {
+        // border-color: var(--primary-green-light);
+        // border-radius: 15px !important;
+        border: 0px !important;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        border: 0 !important;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-flex {
+        border       : 2px solid var(--primary-green-light);
+        border-radius: 15px !important;
+    }
+}
+
+// .mat-form-field.mat-form-field-appearance-fill {
+//     outline: none !important;
+//     border: none !important;
+// }
+
+
+
+.label {
+    margin     : 1.5rem 2rem 1.5rem 1.5rem;
+    font-size  : 15px;
+    font-weight: 500;
+    color      : var(--text-white);
+}
+
+#wrapper {
+    .mat-dialog-title {
+        display        : flex !important;
+        justify-content: space-between !important;
+        align-items    : center !important;
+        background     : var(--primary-green-light);
+        padding        : 10px 1rem;
+
+        .dialog-title {
+            margin: 0 !important;
+            color : var(--text-white);
+        }
+
+        .close-btn {
+            background     : transparent !important;
+            color          : var(--text-white);
+            width          : 35px;
+            height         : 35px;
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+        }
+    }
+
+    #dialog-content {
+        display          : flex;
+        flex-direction   : column;
+        // width: 100%;
+        margin           : 0 !important;
+        // margin-bottom : 2rem !important;
+
+        // .label {
+        //     margin: 1.5rem 2rem 1.5rem 1.5rem;
+        //     font-size: 15px;
+        //     font-weight: 500;
+        //     color: var(--text-white);
+        // }
+
+        .photo-box {
+            display       : flex;
+            flex-direction: column;
+            align-items   : center;
+            border-radius : 15px;
+            border        : 2px solid var(--primary-green-light);
+            padding       : 5px;
+            margin-top    : 2rem;
+            // width: 100%;
+
+            .photo {
+                // width: 100%;
+                // // border: 2px solid red;
+                display        : flex;
+                justify-content: center;
+                align-items    : center;
+
+                // background: var(--primary-green-light);
+                // border: 2px solid red;
+                border-radius: 15px;
+                overflow     : hidden;
+                height       : 120px;
+                width        : 50%;
+                position     : relative;
+
+                .add-icon {
+                    color: var(--text-white);
+                }
+
+                .cat-img {
+                    width     : 100%;
+                    height    : 100%;
+                    object-fit: cover;
+                }
+
+                .cat-overlay {
+                    display: none;
+                }
+
+                &:hover .cat-overlay {
+                    position       : absolute;
+                    top            : 0;
+                    left           : 0;
+                    width          : 100%;
+                    height         : 100%;
+                    display        : flex;
+                    justify-content: center;
+                    align-items    : center;
+                    background     : #21212180;
+                    transition     : 1s cubic-bezier(0.5, 0, 0.5, 1);
+
+                    .mat-icon {
+                        background   : var(--primary-green-clr);
+                        transform    : scale(0.8);
+                        padding      : 8px;
+                        border-radius: 50%;
+                    }
+
+                    .dlt-btn {
+                        background : red;
+                        margin-left: 0.5rem;
+                    }
+                }
+
+                // .cat-overlay {
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                //     width: 100%;
+                //     height: 100%;
+                //     display: flex;
+                //     justify-content: center;
+                //     align-items: center;
+                //     background: rgba(255, 0, 0, 0.465);
+                // }
+
+                // .pp {
+                //     background: red;
+                //     height: 120px;
+                //     width: 50%;
+                // }
+            }
+        }
+
+        #form {
+            margin-top: 2.5rem;
+
+            .mat-form-field {
+                width: 100% !important;
+
+                .mat-form-field-wrapper {
+                    padding: 0 !important;
+                }
+            }
+
+            input.mat-input-element::placeholder {
+                color: #fff !important;
+            }
+        }
+    }
+
+    .mat-dialog-actions {
+        padding      : 0 24px !important;
+        margin-bottom: 24px !important;
+
+
+        .action-btn {
+            width        : 100%;
+            border-radius: 15px;
+        }
+
+        .save-btn {
+            // border: 2px solid var(--primary-green-light) !important;
+            color     : var(--primary-green-clr) !important;
+            background: var(--primary-green-light);
+        }
+
+        .active-btn {
+            background: var(--primary-green-clr) !important;
+            color     : var(--text-white) !important;
+        }
+    }
+}
+
+// TODO :: -- Mobile CSS
+
+
+@media screen and (max-width: 600) {
+    #product-dialog {
+        // width: 100vw !important;
+        height: 100vh !important;
+    }
+}

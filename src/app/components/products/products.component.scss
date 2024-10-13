@@ -1,0 +1,130 @@
+// TODO : ---- SHORT CLASSES
+
+.w-full {
+    width: 100%;
+}
+
+
+
+.mat-form-field {
+    width: 100%;
+}
+
+table.mat-table {
+    width        : 100%;
+    border-radius: 15px;
+}
+
+::ng-deep #tab-container {
+    .mat-form-field-appearance-legacy .mat-form-field-underline {
+        height: 0 !important;
+    }
+
+    .mat-form-field-flex {
+        border       : 2px solid var(--primary-green-clr);
+        border-radius: 30px;
+        padding      : 0 20px;
+    }
+
+    .mat-form-field-infix {
+        border-top: 0 !important;
+    }
+
+    .mat-form-field-outline-start {
+        // border-color: var(--primary-green-light);
+        // border-radius: 15px !important;
+        border: 0px !important;
+    }
+
+    .mat-form-field-outline-gap {
+        // border-color: var(--primary-green-light);
+        // border-radius: 15px !important;
+        border: 0px !important;
+    }
+
+    .mat-form-field-outline-end {
+        // border-color: var(--primary-green-light);
+        // border-radius: 15px !important;
+        border: 0px !important;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        border: 0 !important;
+    }
+
+    // .mat-form-field-appearance-outline .mat-form-field-flex {
+    //     border: 2px solid var(--primary-green-light);
+    //     border-radius: 15px !important;
+    // }
+}
+
+
+::ng-deep #data-table {
+    .mat-paginator-container {
+        justify-content: space-between !important;
+    }
+
+    tr.mat-header-row {
+        background   : var(--primary-green-clr);
+        // background: #4444ff;
+    }
+}
+
+::ng-deep #search {
+    margin-bottom: 2rem;
+    // width: 80%;
+
+    // .mat-form-field-wrapper {
+    //     padding: 0 !important;
+    // }
+}
+
+#tab-container {
+    max-height: 600px;
+    overflow-y: scroll;
+    margin    : 0 0 2rem;
+
+    .tab-title {
+        margin     : 0 !important;
+        font-weight: 700;
+        font-size  : 25px;
+    }
+
+    #data-table {
+        overflow     : hidden;
+        border-radius: 20px;
+        // border: 2px solid red;
+
+        .mat-header-cell {
+            color      : var(--text-white) !important;
+            font-weight: 500;
+            font-size  : 14px;
+        }
+
+        // TODO - Form Field CSS
+
+        .mat-form-field:focus-within {
+            outline: 0 !important;
+        }
+
+        .add-btn {
+            color      : var(--primary-green-clr);
+            margin-left: 0.8rem;
+        }
+
+        .edit-btn {
+            color: var(--primary-green-clr);
+        }
+
+        .dlt-btn {
+            color      : #ff2c2c;
+            margin-left: 0.8rem;
+        }
+
+        //TODO - ADVANCE TABLE SEASONS 
+
+        .seasons-list {
+            padding: 1rem;
+        }
+    }
+}

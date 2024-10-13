@@ -1,0 +1,118 @@
+<div id="wrapper">
+    <div mat-dialog-title class="">
+        <h2 class="dialog-title">Add Category</h2>
+        <button mat-button class="bg-primary" mat-dialog-close class="close-btn" disableRipple>
+            <mat-icon class="text-white">close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content id="dialog-content">
+        <!-- <fuse-alert class="m-8 -mb-4" *ngIf="isConfigError" [appearance]="'outline'" [showIcon]="false" [type]="'error'"
+            [@shake]="true">
+            Configuration Error, Please contact administrator
+        </fuse-alert> -->
+        <!-- <label class="label">Image</label> -->
+        <div class="photo-box">
+            <!-- <div class="flex sm:col-span-4"> -->
+            <input type="file" #fileinput (change)="updateFile('photo', $event)"
+                accept="image/png, image/gif, image/jpeg" hidden />
+            <!-- </div> -->
+
+            <ng-container *ngIf="!photo['src']">
+                <div class="photo" style="cursor: pointer;" (click)="fileinput.click()">
+
+                    <mat-icon class="add-icon">add</mat-icon>
+
+                    <!-- <ng-container *ngIf="logoDP; else noImage">
+                        <div class="flex flex-row justify-center w-full h-full pt-6 filter-info">
+                            <button mat-mini-fab color="primary" class="mt-9" (click)="fileinput.click()">
+                                <mat-icon class="icon-size-5 text-primary" [svgIcon]="'heroicons_solid:pencil'"></mat-icon>
+                            </button>
+                            <img class="max-w-20 max-h-20 sm:max-w-30 sm:max-h-30 mt-4 sm:mt-0 rounded-lg object-cover mx-6"
+                                [src]="logoDP">
+                            <button mat-mini-fab color="accent" class="mt-9" (click)="removeLogo()">
+                                <mat-icon class="icon-size-5 text-primary" [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                    <ng-template #noImage>
+                        <div class="flex flex-col items-center w-full h-full p-6 filter-info">
+                            <button (click)="fileinput.click()"
+                                class="flex flex-col items-center w-30 h-30 justify-center p-5 rounded-xl bg-primary-100 dark:bg-gray-600">
+                                <mat-icon class="icon-size-10 text-primary-500 dark:text-primary-300"
+                                    [svgIcon]="'iconsmind:camera_3'"></mat-icon>
+                                <p class="font-normal leading-tight text-center mt-1 text-primary">Add Image</p>
+                            </button>
+                        </div>
+                    </ng-template> -->
+                </div>
+
+            </ng-container>
+
+            <div class="photo" *ngIf="photo['src']">
+                <img class="cat-img" [src]="photo['src']" alt="">
+
+                <div class="cat-overlay">
+                    <mat-icon class="edit-btn" (click)="fileinput.click()">edit</mat-icon>
+                    <mat-icon class="dlt-btn" (click)="removeLogo()">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <form [formGroup]="form" id="form">
+            <mat-form-field appearance="outline">
+                <!-- <mat-label class="label">Category</mat-label> -->
+                <input matInput placeholder="Enter Category" [formControlName]="'category'">
+            </mat-form-field>
+        </form>
+        <!-- <form [formGroup]="faqCategoryForm" *ngIf="faqCategoryForm" class="p-8">
+            <div class="flex mt-3">
+                <mat-form-field class="flex-auto">
+                    <mat-label>App</mat-label>
+                    <mat-select [formControlName]="'productId'">
+                        <mat-option value="-1">Select App</mat-option>
+                        <mat-option value="{{ product.key }}" *ngFor="let product of productIds">{{
+                            product.value }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="faqCategoryForm.get('productId')
+                                                                    .hasError('pattern')
+                                                            ">
+                        App is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="flex mt-3">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Category</mat-label>
+                    <input matInput [placeholder]="'Category'" [formControlName]="'subType'" required />
+                    <mat-error *ngIf="faqCategoryForm.get('subType')
+                                                    .hasError('required')
+                                            ">
+                        Category is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="flex mt-3">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Order No</mat-label>
+                    <input matInput [placeholder]="'Order No'" [formControlName]="'orderNo'" required />
+                    <mat-error *ngIf="faqCategoryForm.get('orderNo')
+                                                    .hasError('required')
+                                            ">
+                        Order No is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form> -->
+    </div>
+
+
+    <mat-dialog-actions class="">
+        <!-- <button mat-flat-button [color]="'warn'" mat-dialog-close [color]="'accent'">
+            Cancel
+        </button> -->
+        <button mat-flat-button class="action-btn save-btn" [color]="'primary'" (click)="submit()">
+            <span *ngIf="!loading">Save</span>
+            <!-- <img src="assets/images/avatars/spinner.gif" *ngIf="loading" alt="loading" class="h-full"> -->
+        </button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,147 @@
+<div id="wrapper">
+    <div mat-dialog-title class="">
+        <h2 class="dialog-title">Add Season</h2>
+        <button mat-button class="bg-primary" mat-dialog-close class="close-btn" disableRipple>
+            <mat-icon class="text-white">close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content id="dialog-content">
+
+        <div class="top-section">
+            <div class="photo-box">
+                <!-- <ng-container *ngIf="!photo['src']">
+                    <div class="photo" style="cursor: pointer;">
+                        <div>
+                            Upload trailer
+                        </div>
+                    </div>
+                </ng-container> -->
+
+                <div class="photo" *ngIf="poster">
+                    <img class="cat-img" [src]="poster" alt="">
+                    <!-- <video [src]="photo['src']"></video> -->
+
+                    <!-- <div class="cat-overlay">
+                        <mat-icon class="edit-btn" (click)="fileinput.click()">edit</mat-icon>
+                        <mat-icon class="dlt-btn" (click)="removeLogo()">delete</mat-icon>
+                    </div> -->
+                </div>
+            </div>
+            <form [formGroup]="form" id="form">
+                <div style="font-size: 17px; font-weight: 700; margin-bottom: 1rem;">
+                    Season details
+                </div>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Enter season number" [formControlName]="'season'">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <input type="text" [value]="data.teaser ? data.teaser : photo.fileName" matInput
+                        placeholder="Upload trailer" readonly>
+                    <mat-icon matSuffix (click)="fileinput.click()">movie</mat-icon>
+
+                    <input type="file" #fileinput (change)="updateFile('photo', $event)"
+                        accept="video/mp4, video/mkv, video/webm video/quicktime" hidden />
+                </mat-form-field>
+            </form>
+        </div>
+
+
+        <!-- TODO : -- EDISODES -->
+        <div class="bottom-section">
+            <div style="font-size: 17px; font-weight: 700; margin-bottom: 1rem;">
+                Episodes
+            </div>
+
+            <ng-container *ngIf="episodes.length === 0 && !isShow">
+                <div class="add-section" (click)="isShow = true">
+                    <mat-icon>add</mat-icon>
+                    <div class="add-txt">Add Episode</div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="episodes.length > 0">
+                <div class="add-btn" (click)="isShow = true">
+                    <button class="btn">Add episode</button>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="isShow">
+                <div class="" style="display: flex; justify-content: space-between; align-items: center;">
+                    <form [formGroup]="episodeForm" id="form" style="display: flex; align-items: center; width: 80%;">
+                        <mat-form-field appearance="outline" style="">
+                            <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" style="margin-left: 1rem;">
+                            <input matInput placeholder="Enter title" [formControlName]="'title'">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" style="margin-left: 1rem;">
+                            <input matInput placeholder="Enter URL" [formControlName]="'url'">
+                        </mat-form-field>
+                    </form>
+
+                    <div style="margin-top: 1rem;">
+                        <button mat-flat-button color="primary" [disabled]="!episodeForm.valid" (click)="addEpisode()">
+                            Save
+                        </button>
+
+                        <button mat-flat-button color="primary" style="margin-left: 1rem;"
+                            (click)="discardEpisodeChange()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="episodes.length > 0">
+                <div class="episode-list">
+                    <div class="episode-item">
+                        <div>
+                            Title
+                        </div>
+
+                        <div>
+                            URL
+                        </div>
+
+                        <div>
+                            Actions
+                        </div>
+                    </div>
+
+                    <div class="episode-item" *ngFor="let episode of episodes">
+                        <div>
+                            #{{episode.episodeNumber}} {{episode.title}}
+                        </div>
+
+                        <div style="max-width: 300px; overflow: hidden;">
+                            {{episode.url}}
+                        </div>
+
+                        <div>
+                            <mat-icon class="edit-btn">edit</mat-icon>
+                            <mat-icon class="dlt-btn">delete</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+
+
+    <mat-dialog-actions class="">
+        <!-- <button mat-flat-button [color]="'warn'" mat-dialog-close [color]="'accent'">
+            Cancel
+        </button> -->
+        <button mat-flat-button class="action-btn" [disabled]="this.photo['src'] === '' || !form.valid"
+            [ngClass]="this.photo['src'] !== '' && form.valid ? 'active-btn' : 'save-btn'" [color]="'primary'"
+            (click)="submit()">
+            <span *ngIf="!loading">Save</span>
+            <!-- <img src="assets/images/avatars/spinner.gif" *ngIf="loading" alt="loading" class="h-full"> -->
+        </button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,85 @@
+<mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="example-sidenav" [mode]="getMobile() ? 'over' : 'side'"
+        [opened]="getMobile() ? false : true">
+
+        <div class="user-details">
+            <div class="user-photo">
+                <img src="assets/images/ohma-tokita.jpg" alt="">
+            </div>
+
+            <div class="user-name-txt">
+                <p>
+                    Jack Reacher
+                </p>
+            </div>
+        </div>
+
+        <ul class="navigation-list">
+            <li routerLink="products" class="navigation-item" routerLinkActive="active-tab">
+
+                <div class="navigation-icon">
+                    <mat-icon>grid_view</mat-icon>
+                </div>
+
+                <p class="navigation-txt">
+                    Anime List
+                </p>
+            </li>
+            <li routerLink="category" class="navigation-item" routerLinkActive="active-tab">
+
+                <div class="navigation-icon">
+                    <mat-icon>grid_view</mat-icon>
+                </div>
+
+                <p class="navigation-txt">
+                    Seasons
+                </p>
+            </li>
+        </ul>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <!-- <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+        </button> -->
+
+        <div class="sidenav-content-header" [ngClass]="getMobile() ? 'flex-between' : 'flex-end'">
+
+            <ng-container *ngIf="getMobile()">
+                <div (click)="drawer.toggle()">
+                    <mat-icon class="user-icon">menu</mat-icon>
+                </div>
+            </ng-container>
+
+            <div [matMenuTriggerFor]="beforeMenu">
+                <mat-icon class="user-icon">account_circle</mat-icon>
+            </div>
+
+            <mat-menu #beforeMenu="matMenu" xPosition="before">
+                <button mat-menu-item>Profile</button>
+                <button mat-menu-item (click)="logout()">Logout</button>
+            </mat-menu>
+        </div>
+
+
+        <div class=" route-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <!-- </mat-drawer-container><mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+        </button>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+        </button>
+    </div>
+
+</mat-drawer-container> -->

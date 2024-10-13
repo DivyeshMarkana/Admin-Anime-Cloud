@@ -1,0 +1,72 @@
+<div id="tab-container">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 2rem 0 3rem 0;">
+
+        <h2 class="tab-title">Product Category</h2>
+
+        <button style="margin-left: 2rem; background: var(--primary-green-clr);" mat-raised-button color="primary"
+            (click)="addCategory()">Add
+            Category</button>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <mat-form-field id="search" appearance="outline">
+            <!-- <mat-label>Filter</mat-label> -->
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search Category" #input>
+        </mat-form-field>
+    </div>
+
+
+    <div class="" id="data-table">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="photo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                <td mat-cell *matCellDef="let row">
+                    <div *ngIf="row.photo"
+                        style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid #80808040; overflow: hidden;">
+                        <img [src]="row.photo" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+
+                    <div *ngIf="!row.photo"
+                        style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid #80808040; overflow: hidden">
+                        <img src="../../../assets/images/no-data.jpg" alt="" style="width: 100%; height: 100%;">
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="categoryId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Category Id </th>
+                <td mat-cell *matCellDef="let row"> {{row.categoryId}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Document Id </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-icon class="edit-btn" (click)="edit(row)">edit</mat-icon>
+                    <mat-icon class="dlt-btn" (click)="delete(row)">delete</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row style="height: 56px;" *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+    </div>
+
+</div>

@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --sidebar-bg         : #212121;
+    --text-white         : #fff;
+    --primary-green-clr  : #007b9d;
+    --primary-green-light: #007b9dbf;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin     : 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-flat-button.mat-primary {
+    background-color: var(--primary-green-light);
+}
+
+.mat-icon.mat-primary {
+    color: var(--primary-green-light);
+}
+
+.mat-dialog-container {
+    padding      : 0% !important;
+    border-radius: 15px !important;
+    overflow     : hidden !important;
+    background   : #212121 !important;
+    color        : var(--text-white) !important;
+}
+
+.mat-dialog-content {
+    margin: 0 !important;
+}
+
+// .mat-form-field-outline-start {
+//     // border-color: var(--primary-green-light);
+//     // border-radius: 15px !important;
+//     border: 0px !important;
+// }
+
+// .mat-form-field-outline-gap {
+//     // border-color: var(--primary-green-light);
+//     // border-radius: 15px !important;
+//     border: 0px !important;
+// }
+
+// .mat-form-field-outline-end {
+//     // border-color: var(--primary-green-light);
+//     // border-radius: 15px !important;
+//     border: 0px !important;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-infix {
+//     border: 0 !important;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-flex {
+//     border: 2px solid var(--primary-green-light);
+//     border-radius: 15px !important;
+// }

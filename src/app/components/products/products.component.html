@@ -1,0 +1,222 @@
+<div id="tab-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 2rem 0 3rem 0;">
+
+        <h2 class="tab-title">Anime List</h2>
+
+        <button style="margin-left: 2rem; background: var(--primary-green-clr);" mat-raised-button color="primary"
+            (click)="addCategory()">
+            Add Anime
+        </button>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <mat-form-field id="search" appearance="outline">
+            <!-- <mat-label>Filter</mat-label> -->
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search Product" #input>
+        </mat-form-field>
+
+        <!-- <button style="margin-left: 2rem; background: var(--primary-green-clr);" mat-raised-button color="primary"
+            (click)="addCategory()">Add
+            Category</button> -->
+    </div>
+
+
+    <div class="" id="data-table">
+        <!-- <div id="tbl"> -->
+        <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+            <ng-container matColumnDef="details">
+                <th mat-header-cell *matHeaderCellDef>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <div>
+                        <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button (click)="expandRow(row)">
+                            <ng-container *ngIf="expandedElement && expandedElement.id == row.id">
+                                <mat-icon>expand_less</mat-icon>
+                            </ng-container>
+
+                            <ng-container *ngIf="!expandedElement || expandedElement.id != row.id">
+                                <mat-icon>expand_more</mat-icon>
+                            </ng-container>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="poster">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                <td mat-cell *matCellDef="let row">
+                    <div *ngIf="row.poster"
+                        style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid #80808040; overflow: hidden;">
+                        <img [src]="row.poster" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+
+                    <div *ngIf="!row.poster"
+                        style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid #80808040; overflow: hidden">
+                        <img src="../../../assets/images/no-data.jpg" alt="" style="width: 100%; height: 100%;">
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Anime Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Document Id </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                    <div class="example-element-detail"
+                        [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="w-full">
+                            <div class="seasons-list">
+                                <!-- <mat-accordion>
+                                    <mat-expansion-panel hideToggle>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                This is the expansion title
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <p>This is the primary content of the panel.</p>
+                                    </mat-expansion-panel>
+                                </mat-accordion> -->
+
+
+
+
+
+
+
+                                <table mat-table [dataSource]="childDataSource" matSort multiTemplateDataRows>
+                                    <ng-container matColumnDef="subDetails">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                        </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <div>
+                                                <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button
+                                                    (click)="expandChildRow(row)">
+                                                    <ng-container
+                                                        *ngIf="expandedChildElement && expandedChildElement.id == row.id">
+                                                        <mat-icon>expand_less</mat-icon>
+                                                    </ng-container>
+
+                                                    <ng-container
+                                                        *ngIf="!expandedChildElement || expandedChildElement.id != row.id">
+                                                        <mat-icon>expand_more</mat-icon>
+                                                    </ng-container>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="poster">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <div *ngIf="row.poster"
+                                                style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid #80808040; overflow: hidden;">
+                                                <img [src]="row.poster" alt=""
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+
+                                            <div *ngIf="!row.poster"
+                                                style="width: 40px; height: 40px; border-radius: 8px; border: 1px solid #80808040; overflow: hidden">
+                                                <img src="../../../assets/images/no-data.jpg" alt=""
+                                                    style="width: 100%; height: 100%;">
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="season">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Season </th>
+                                        <td mat-cell *matCellDef="let row"> Season {{row.season}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="teaser">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> teaser </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <mat-icon color="primary">movie</mat-icon>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Document Id </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="expandedDetail">
+                                        <td mat-cell *matCellDef="let element"
+                                            [attr.colspan]="displayedChildColumns.length">
+                                            <div class="example-element-detail"
+                                                [@detailExpand]="element === expandedChildElement ? 'expanded' : 'collapsed'">
+                                                <div class="w-full">
+                                                    <div class="seasons-list">
+
+                                                        HERE..... EPISODES
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="actions">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <mat-icon class="edit-btn" (click)="editSeason(row)">edit</mat-icon>
+                                            <mat-icon class="dlt-btn" (click)="delete(row)">delete</mat-icon>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedChildColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedChildColumns;"
+                                        [class.example-expanded-row]="expandedChildElement === row">
+                                    </tr>
+                                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
+                                        class="example-detail-row"></tr>
+                                    <tr class="mat-row" *matNoDataRow>
+                                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-icon class="edit-btn" (click)="edit(row)">edit</mat-icon>
+                    <mat-icon class="dlt-btn" (click)="delete(row)">delete</mat-icon>
+                    <mat-icon class="add-btn" (click)="addNewSeason(row)">add_circle_outline</mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                [class.example-expanded-row]="expandedElement === row">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
+        <!-- </div> -->
+    </div>
+</div>
