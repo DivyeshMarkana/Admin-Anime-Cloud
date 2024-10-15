@@ -27,6 +27,12 @@
         border       : 2px solid var(--primary-green-light);
         border-radius: 15px !important;
     }
+
+    .mat-form-field-disabled {
+        .mat-input-element:disabled {
+            color: var(--text-white) !important;
+        }
+    }
 }
 
 .label {

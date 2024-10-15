@@ -254,7 +254,21 @@ export class AddSeasonComponent implements OnInit {
 
     console.log(this.episodes);
     this._change.detectChanges();
+  }
 
+
+  editEpiSode(episode){
+    this.isShow = true;
+    this.episodeForm.get('episodeNumber')?.disable();
+    this.episodeForm.patchValue({
+      title: episode.title ?? '',
+      episodeNumber: episode.episodeNumber ?? '',
+      fileId: 'vid_111',
+      url: episode.url ?? ''
+    });
+  }
+
+  deleteEpisode(){
 
   }
 

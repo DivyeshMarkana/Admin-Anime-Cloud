@@ -85,16 +85,16 @@ tr.example-element-row:not(.example-expanded-row):active {
 export class ProductsComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['details', 'poster', 'name', 'id', 'actions'];
-  displayedChildColumns: string[] = ['subDetails', 'poster', 'season', 'teaser', 'id', 'actions'];
+  // displayedChildColumns: string[] = ['subDetails', 'poster', 'season', 'teaser', 'id', 'actions'];
+  displayedChildColumns: string[] = ['poster', 'season', 'teaser', 'id', 'actions'];
   dataSource: MatTableDataSource<any>;
   childDataSource: MatTableDataSource<any>;
 
   categories: any = [];
   products: any = [];
   seasons: any = [];
-
   expandedElement: any = null;
-  expandedChildElement: any = null;
+  // expandedChildElement: any = null;
 
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -149,9 +149,9 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  expandChildRow(row) {
-    this.expandedChildElement = this.expandedChildElement === row ? null : row;
-  }
+  // expandChildRow(row) {
+  //   this.expandedChildElement = this.expandedChildElement === row ? null : row;
+  // }
 
 
   getProducts() {
@@ -200,6 +200,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.seasons = data;
       });
 
+      
       this.childDataSource = new MatTableDataSource(this.seasons);
       this.change.detectChanges();
     })
@@ -269,6 +270,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       // height: '500px',
       maxWidth: '100vw',
       // minHeight: '94vh',
+      disableClose: true
     });
 
     ref.componentInstance.data = anime;
@@ -288,6 +290,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
       // height: '500px',
       maxWidth: '100vw',
       // minHeight: '94vh',
+      disableClose: true
     });
 
     ref.componentInstance.data = anime;
