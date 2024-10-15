@@ -34,6 +34,7 @@ export class AddSeasonComponent implements OnInit {
   data: any = null;
   episodes: any[] = [];
   isShow = false;
+  isEditEpisode = false;
   poster = null
   isNewSeason;
   STORAGE = getStorage();
@@ -227,6 +228,10 @@ export class AddSeasonComponent implements OnInit {
     });
   }
 
+  sortEpisodes(array){
+    array.sort((a, b) => a.episodeNumber - b.episodeNumber);
+  }
+
   addEpisode() {
 
     const episode = {
@@ -245,10 +250,12 @@ export class AddSeasonComponent implements OnInit {
         alert('Episode number is exists');
       } else {
         this.episodes.push(episode);
+        this.sortEpisodes(this.episodes);
         this.discardEpisodeChange();
       }
     } else {
       this.episodes.push(episode);
+      this.sortEpisodes(this.episodes);
       this.discardEpisodeChange();
     }
 
@@ -259,7 +266,8 @@ export class AddSeasonComponent implements OnInit {
 
   editEpiSode(episode){
     this.isShow = true;
-    this.episodeForm.get('episodeNumber')?.disable();
+    this.isEditEpisode = true;
+    // this.episodeForm.get('episodeNumber')?.disable();
     this.episodeForm.patchValue({
       title: episode.title ?? '',
       episodeNumber: episode.episodeNumber ?? '',
@@ -268,8 +276,31 @@ export class AddSeasonComponent implements OnInit {
     });
   }
 
-  deleteEpisode(){
+  saveEpisode(){
 
+    console.log(this.episodeForm.value);
+    
+    this.episodes.map(x => {
+        if(x.episodeNumber == this.episodeForm.value.episodeNumber){
+          x['episodeNumber'] = this.episodeForm.value.episodeNumber;
+          x['url'] = this.episodeForm.value.url;
+          x['title'] = this.episodeForm.value.title;
+          x['fileId'] = this.episodeForm.value.fileId;
+
+          // x = this.episodeForm.value;
+
+          console.log('sssss');
+          
+        }
+    });
+    this.sortEpisodes(this.episodes);
+    console.log(this.episodes);
+    this.discardEpisodeChange();
+    
+  }
+
+  deleteEpisode(index){
+    this.episodes.splice(index, 1);
   }
 
 }

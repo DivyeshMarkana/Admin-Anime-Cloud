@@ -70,7 +70,7 @@
                 <div class="" style="display: flex; justify-content: space-between; align-items: center;">
                     <form [formGroup]="episodeForm" id="form" style="display: flex; align-items: center; width: 80%;">
                         <mat-form-field appearance="outline" style="">
-                            <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'">
+                            <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'" [readOnly]="isEditEpisode">
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" style="margin-left: 1rem;">
@@ -83,9 +83,17 @@
                     </form>
 
                     <div style="margin-top: 1rem;">
-                        <button mat-flat-button color="primary" [disabled]="!episodeForm.valid" (click)="addEpisode()">
-                            Save
-                        </button>
+                        <ng-container *ngIf="!isEditEpisode">
+                            <button mat-flat-button color="primary" [disabled]="!episodeForm.valid" (click)="addEpisode()">
+                                Save
+                            </button>
+                        </ng-container>
+
+                        <ng-container *ngIf="isEditEpisode">
+                            <button mat-flat-button color="primary" [disabled]="!episodeForm.valid" (click)="saveEpisode()">
+                                Update
+                            </button>
+                        </ng-container>
 
                         <button mat-flat-button color="primary" style="margin-left: 1rem;"
                             (click)="discardEpisodeChange()">
@@ -112,7 +120,7 @@
                         </div>
                     </div>
 
-                    <div class="episode-item" *ngFor="let episode of episodes">
+                    <div class="episode-item" *ngFor="let episode of episodes; let i = index">
                         <div>
                             #{{episode.episodeNumber}} {{episode.title}}
                         </div>
@@ -122,8 +130,8 @@
                         </div>
 
                         <div>
-                            <mat-icon (click)="editEpiSode(episode)" class="edit-btn">edit</mat-icon>
-                            <mat-icon class="dlt-btn">delete</mat-icon>
+                            <mat-icon color="primary" (click)="editEpiSode(episode)" class="edit-btn">edit</mat-icon>
+                            <mat-icon color="warn" (click)="deleteEpisode(i)" style="margin-left: 1rem;" class="dlt-btn">delete</mat-icon>
                         </div>
                     </div>
                 </div>
