@@ -32,7 +32,7 @@ export class AddSeasonComponent implements OnInit {
   }
 
   data: any = null;
-  episodes: any = [];
+  episodes: any[] = [];
   isShow = false;
   poster = null
   isNewSeason;
@@ -61,7 +61,9 @@ export class AddSeasonComponent implements OnInit {
     console.log(this.data);
     if (this.data) {
       this.poster = this.data.poster;
-      this.episodes = this.data.episodes;
+      if(!this.isNewSeason){
+        this.episodes = this.data.episodes;
+      }
       console.log(this.episodes);
 
       // this.GUID = {
@@ -137,7 +139,7 @@ export class AddSeasonComponent implements OnInit {
             const params = {
               teaser: url,
               season: this.form.value.season,
-              masterId: this.isNewSeason ? this.data.id : this.data.masterId,
+              masterId: this.isNewSeason ? this.data.id.trim() : this.data.masterId.trim(),
               poster: this.poster,
               episodes: this.episodes,
               // categoryId: this.GUID.value
@@ -168,7 +170,7 @@ export class AddSeasonComponent implements OnInit {
       console.log('not have any image');
       const params = {
         season: this.form.value.season,
-        masterId: this.data.id,
+        masterId: this.isNewSeason ? this.data.id.trim() : this.data.masterId.trim(),
         teaser: this.photo['src'],
         poster: this.poster,
         episodes: this.episodes
@@ -181,13 +183,13 @@ export class AddSeasonComponent implements OnInit {
         const dataToUpdate = doc(this.firestore, 'seasons', this.data['id']);
 
         updateDoc(dataToUpdate, params).then(() => {
-          this.dialogRef.close();
+          this.dialogRef.close(this.data.masterId);
         }).catch((err) => {
           alert(err.message)
         })
       } else {
         addDoc(databaseInstance, params).then(() => {
-          this.dialogRef.close();
+          this.dialogRef.close(this.data.id);
         }).catch((err) => {
           alert(err.message)
         })

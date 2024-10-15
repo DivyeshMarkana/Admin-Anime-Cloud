@@ -1,6 +1,6 @@
 <div id="wrapper">
     <div mat-dialog-title class="">
-        <h2 class="dialog-title">Add Season</h2>
+        <h2 class="dialog-title"> {{isNewSeason ? 'Add new Season' : 'Edit Season ' + data.season}}</h2>
         <button mat-button class="bg-primary" mat-dialog-close class="close-btn" disableRipple>
             <mat-icon class="text-white">close</mat-icon>
         </button>
@@ -53,7 +53,7 @@
                 Episodes
             </div>
 
-            <ng-container *ngIf="episodes.length === 0 && !isShow">
+            <ng-container *ngIf="episodes && episodes.length === 0 && !isShow">
                 <div class="add-section" (click)="isShow = true">
                     <mat-icon>add</mat-icon>
                     <div class="add-txt">Add Episode</div>

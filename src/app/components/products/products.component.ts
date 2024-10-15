@@ -143,10 +143,10 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   expandRow(row) {
-    console.log(row);
     this.expandedElement = this.expandedElement === row ? null : row;
-
-    this.getAnimeSeasons(row.id)
+    if(this.expandedElement === row){
+      this.getAnimeSeasons(row.id);
+    }
   }
 
   expandChildRow(row) {
@@ -273,6 +273,12 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
     ref.componentInstance.data = anime;
     ref.componentInstance.isNewSeason = true;
+
+    ref.afterClosed().subscribe(result => {
+      if(result != ''){
+        this.getAnimeSeasons(anime.id);
+      }
+    });
   }
 
   editSeason(anime) {
@@ -285,6 +291,12 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     });
 
     ref.componentInstance.data = anime;
-    ref.componentInstance.isNewSeason = false
+    ref.componentInstance.isNewSeason = false;
+
+    ref.afterClosed().subscribe(result => {
+      if(result != ''){
+        this.getAnimeSeasons(result);
+      }
+    });
   }
 }
