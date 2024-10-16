@@ -157,8 +157,8 @@
                                     <tr mat-row *matRowDef="let row; columns: displayedChildColumns;"
                                         [class.example-expanded-row]="expandedChildElement === row">
                                     </tr>
-                                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
-                                        class="example-detail-row"></tr>
+                                    <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
+                                        class="example-detail-row"></tr> -->
                                     <tr class="mat-row" *matNoDataRow>
                                         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"
                                         </td>

@@ -201,9 +201,12 @@
                 margin-block: 1rem;
 
                 .episode-item {
-                    display        : flex;
-                    justify-content: space-between;
-                    align-items    : center;
+                    // display        : flex;
+                    // justify-content: space-between;
+                    // align-items    : center;
+
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
                     padding        : 13px;
                     background     : #00000030;
 

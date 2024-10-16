@@ -235,9 +235,9 @@ export class AddSeasonComponent implements OnInit {
   addEpisode() {
 
     const episode = {
-      episodeNumber: this.episodeForm.value.episodeNumber,
-      title: this.episodeForm.value.title,
-      url: this.episodeForm.value.url,
+      episodeNumber: this.episodeForm.value.episodeNumber.trim(),
+      title: this.episodeForm.value.title.trim(),
+      url: this.episodeForm.value.url.trim(),
       fileId: 'vid_111'
     }
 
@@ -267,24 +267,20 @@ export class AddSeasonComponent implements OnInit {
   editEpiSode(episode){
     this.isShow = true;
     this.isEditEpisode = true;
-    // this.episodeForm.get('episodeNumber')?.disable();
     this.episodeForm.patchValue({
-      title: episode.title ?? '',
+      title: episode.title.trim() ?? '',
       episodeNumber: episode.episodeNumber ?? '',
       fileId: 'vid_111',
-      url: episode.url ?? ''
+      url: episode.url.trim() ?? ''
     });
   }
 
   saveEpisode(){
-
-    console.log(this.episodeForm.value);
-    
     this.episodes.map(x => {
         if(x.episodeNumber == this.episodeForm.value.episodeNumber){
           x['episodeNumber'] = this.episodeForm.value.episodeNumber;
-          x['url'] = this.episodeForm.value.url;
-          x['title'] = this.episodeForm.value.title;
+          x['url'] = this.episodeForm.value.url.trim();
+          x['title'] = this.episodeForm.value.title.trim();
           x['fileId'] = this.episodeForm.value.fileId;
 
           // x = this.episodeForm.value;
@@ -294,7 +290,7 @@ export class AddSeasonComponent implements OnInit {
         }
     });
     this.sortEpisodes(this.episodes);
-    console.log(this.episodes);
+    this.isEditEpisode = false;
     this.discardEpisodeChange();
     
   }

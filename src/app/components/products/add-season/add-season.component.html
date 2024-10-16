@@ -32,7 +32,8 @@
                     Season details
                 </div>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="Enter season number" [formControlName]="'season'">
+                    <input matInput placeholder="Enter season number" [formControlName]="'season'" [readonly]="!isNewSeason" 
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </mat-form-field>
 
                 <mat-form-field class="example-full-width" appearance="outline">
@@ -70,7 +71,8 @@
                 <div class="" style="display: flex; justify-content: space-between; align-items: center;">
                     <form [formGroup]="episodeForm" id="form" style="display: flex; align-items: center; width: 80%;">
                         <mat-form-field appearance="outline" style="">
-                            <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'" [readOnly]="isEditEpisode">
+                            <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'" [readOnly]="isEditEpisode"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" style="margin-left: 1rem;">
@@ -115,7 +117,7 @@
                             URL
                         </div>
 
-                        <div>
+                        <div style="place-self: end;">
                             Actions
                         </div>
                     </div>
@@ -129,7 +131,7 @@
                             {{episode.url}}
                         </div>
 
-                        <div>
+                        <div style="place-self: end;">
                             <mat-icon color="primary" (click)="editEpiSode(episode)" class="edit-btn">edit</mat-icon>
                             <mat-icon color="warn" (click)="deleteEpisode(i)" style="margin-left: 1rem;" class="dlt-btn">delete</mat-icon>
                         </div>
