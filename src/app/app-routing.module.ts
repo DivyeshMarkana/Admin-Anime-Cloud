@@ -23,6 +23,9 @@ const routes: Routes = [
         path: 'latest', loadChildren: () => import('./components/latest/latest.module').then(m => m.LatestModule)
       },
       {
+        path: 'trending', loadChildren: () => import('./components/trending/trending.module').then(m => m.TrendingModule)
+      },
+      {
         path: 'products', loadChildren: () => import('./components/products/products.module').then(m => m.ProductsModule)
       },
     ],
