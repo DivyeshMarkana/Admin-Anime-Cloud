@@ -31,8 +31,12 @@ export class AddProductComponent implements OnInit {
     type: ''
   }
 
-  data = null;
-
+  data:any = null;
+  groups = [
+    'Recommendation',
+    'Latest',
+    'Most Popular',
+  ]
   STORAGE = getStorage();
 
   private GUID;
@@ -44,8 +48,9 @@ export class AddProductComponent implements OnInit {
   ) { }
 
   form: FormGroup = new FormGroup({
-    name: new FormControl('', Validators.required)
+    name: new FormControl('', Validators.required),
   })
+  group = new FormControl('');
 
   ngOnInit(): void {
     console.log(this.data);
@@ -53,7 +58,9 @@ export class AddProductComponent implements OnInit {
       // this.GUID = {
       //   value: this.data['categoryId']
       // };
-      this.photo['src'] = this.data['photo'];
+
+      this.group.setValue(this.data.groups);
+      this.photo['src'] = this.data['poster'];
       this.form.setValue({
         name: this.data['name']
       })
@@ -123,6 +130,7 @@ export class AddProductComponent implements OnInit {
             const params = {
               name: this.form.value.name,
               poster: url,
+              groups: this.group.value
               // categoryId: this.GUID.value
             }
             console.log(params);
@@ -151,6 +159,7 @@ export class AddProductComponent implements OnInit {
       const params = {
         name: this.form.value.name,
         poster: this.photo['src'],
+        groups: this.group.value
         // categoryId: this.GUID.value
       }
       console.log(params);

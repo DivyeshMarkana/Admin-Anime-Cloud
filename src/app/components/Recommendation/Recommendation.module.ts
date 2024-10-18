@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from './products.component';
+import { RecommendationComponent } from './Recommendation.component';
 import { Route, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -13,14 +13,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
 
 
-import { AddProductComponent } from './add-product/add-product.component';
+// import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddSeasonComponent } from './add-season/add-season.component';
+// import { AddSeasonComponent } from './add-season/add-season.component';
 
 
 const routes: Route[] = [
   {
-    path: '', component: ProductsComponent
+    path: '', component: RecommendationComponent
   }
 ]
 
@@ -28,9 +28,9 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [
-    ProductsComponent,
-    AddProductComponent,
-    AddSeasonComponent
+    RecommendationComponent,
+    // AddProductComponent,
+    // AddSeasonComponent
   ],
   imports: [
     CommonModule,
@@ -48,4 +48,4 @@ const routes: Route[] = [
     RouterModule.forChild(routes)
   ]
 })
-export class ProductsModule { }
+export class RecommendationModule { }

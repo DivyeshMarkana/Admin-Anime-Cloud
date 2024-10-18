@@ -17,6 +17,12 @@ const routes: Routes = [
         path: 'category', loadChildren: () => import('./components/product-category/product-category.module').then(m => m.ProductCategoryModule)
       },
       {
+        path: 'recommendation', loadChildren: () => import('./components/Recommendation/Recommendation.module').then(m => m.RecommendationModule)
+      },
+      {
+        path: 'latest', loadChildren: () => import('./components/latest/latest.module').then(m => m.LatestModule)
+      },
+      {
         path: 'products', loadChildren: () => import('./components/products/products.module').then(m => m.ProductsModule)
       },
     ],

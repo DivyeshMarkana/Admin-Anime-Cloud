@@ -5,9 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 // import { ApiService } from 'src/app/shared/api.service';
 import { collection, Firestore, onSnapshot, deleteDoc, updateDoc, doc, query, where, getDocs } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
-import { AddProductComponent } from './add-product/add-product.component';
+// import { AddProductComponent } from './add-product/add-product.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AddSeasonComponent } from './add-season/add-season.component';
+// import { AddSeasonComponent } from './add-season/add-season.component';
 
 export interface UserData {
   id: string;
@@ -17,9 +17,9 @@ export interface UserData {
 }
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss'],
+  selector: 'app-recommendation',
+  templateUrl: './Recommendation.component.html',
+  styleUrls: ['./Recommendation.component.scss'],
   styles: [
     `
         .mat-column-details {
@@ -82,7 +82,7 @@ tr.example-element-row:not(.example-expanded-row):active {
     ]),
   ],
 })
-export class ProductsComponent implements OnInit, AfterViewInit {
+export class RecommendationComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['details', 'poster', 'name', 'id', 'actions'];
   // displayedChildColumns: string[] = ['subDetails', 'poster', 'season', 'teaser', 'id', 'actions'];
@@ -157,29 +157,29 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   getProducts() {
     // const databaseInstance = collection(this.firestore, 'products');
 
-    // const q = query(collection(this.firestore, "products"), where("categoryId", "==", "rBaPFykOrcWfANR6PZpG"));
+    const q = query(collection(this.firestore, "anime"), where("groups", "array-contains", "Recommendation"));
 
-    // getDocs(q).then((snapshot) => {
-    //   let data: any[] = []
-    //   snapshot.forEach(doc => {
-    //     data.push({ ...doc.data(), id: doc.id })
-    //     this.products = data;
-    //   });
-    //   // this.dataSource = new MatTableDataSource(this.products);
-    //   console.log(this.products);
-    // })
-
-    const databaseInstance = collection(this.firestore, 'anime');
-
-    onSnapshot(databaseInstance, snapshot => {
+    getDocs(q).then((snapshot) => {
       let data: any[] = []
       snapshot.forEach(doc => {
         data.push({ ...doc.data(), id: doc.id })
-        this.categories = data;
-        // console.log(this.categories);
+            this.categories = data;
       });
-      this.dataSource = new MatTableDataSource(this.categories);
+        this.dataSource = new MatTableDataSource(this.categories);
+      console.log(this.products);
     })
+
+    // const databaseInstance = collection(this.firestore, 'anime');
+
+    // onSnapshot(databaseInstance, snapshot => {
+    //   let data: any[] = []
+    //   snapshot.forEach(doc => {
+    //     data.push({ ...doc.data(), id: doc.id })
+    //     this.categories = data;
+    //     // console.log(this.categories);
+    //   });
+    //   this.dataSource = new MatTableDataSource(this.categories);
+    // })
   }
 
   getAnimeSeasons(id) {
@@ -220,13 +220,13 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   addCategory() {
-    this.dialog.open(AddProductComponent, {
-      id: 'product-dialog',
-      width: '500px',
-      // height: '500px',
-      maxWidth: '100vw',
-      // minHeight: '94vh',
-    });
+    // this.dialog.open(AddProductComponent, {
+    //   id: 'product-dialog',
+    //   width: '500px',
+    //   // height: '500px',
+    //   maxWidth: '100vw',
+    //   // minHeight: '94vh',
+    // });
   }
 
   applyFilter(event: Event) {
@@ -239,12 +239,12 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   }
 
   edit(row) {
-    const ref = this.dialog.open(AddProductComponent, {
-      id: 'product-dialog',
-      width: '500px',
-      height: '500px'
-    });
-    ref.componentInstance.data = row;
+    // const ref = this.dialog.open(AddProductComponent, {
+    //   id: 'product-dialog',
+    //   width: '500px',
+    //   height: '500px'
+    // });
+    // ref.componentInstance.data = row;
 
   }
 
@@ -264,42 +264,42 @@ export class ProductsComponent implements OnInit, AfterViewInit {
   // *********************************
 
   addNewSeason(anime) {
-    const ref = this.dialog.open(AddSeasonComponent, {
-      id: 'season-dialog',
-      width: '900px',
-      // height: '500px',
-      maxWidth: '100vw',
-      // minHeight: '94vh',
-      disableClose: true
-    });
+    // const ref = this.dialog.open(AddSeasonComponent, {
+    //   id: 'season-dialog',
+    //   width: '900px',
+    //   // height: '500px',
+    //   maxWidth: '100vw',
+    //   // minHeight: '94vh',
+    //   disableClose: true
+    // });
 
-    ref.componentInstance.data = anime;
-    ref.componentInstance.isNewSeason = true;
+    // ref.componentInstance.data = anime;
+    // ref.componentInstance.isNewSeason = true;
 
-    ref.afterClosed().subscribe(result => {
-      if(result != ''){
-        this.getAnimeSeasons(anime.id);
-      }
-    });
+    // ref.afterClosed().subscribe(result => {
+    //   if(result != ''){
+    //     this.getAnimeSeasons(anime.id);
+    //   }
+    // });
   }
 
   editSeason(anime) {
-    const ref = this.dialog.open(AddSeasonComponent, {
-      id: 'season-dialog',
-      width: '900px',
-      // height: '500px',
-      maxWidth: '100vw',
-      // minHeight: '94vh',
-      disableClose: true
-    });
+    // const ref = this.dialog.open(AddSeasonComponent, {
+    //   id: 'season-dialog',
+    //   width: '900px',
+    //   // height: '500px',
+    //   maxWidth: '100vw',
+    //   // minHeight: '94vh',
+    //   disableClose: true
+    // });
 
-    ref.componentInstance.data = anime;
-    ref.componentInstance.isNewSeason = false;
+    // ref.componentInstance.data = anime;
+    // ref.componentInstance.isNewSeason = false;
 
-    ref.afterClosed().subscribe(result => {
-      if(result != ''){
-        this.getAnimeSeasons(result);
-      }
-    });
+    // ref.afterClosed().subscribe(result => {
+    //   if(result != ''){
+    //     this.getAnimeSeasons(result);
+    //   }
+    // });
   }
 }

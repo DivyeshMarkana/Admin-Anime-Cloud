@@ -25,11 +25,19 @@ body {
     color: var(--primary-green-light);
 }
 
+.mat-primary .mat-pseudo-checkbox-checked {
+    background: var(--primary-green-light) !important;
+}
+
+.mat-primary .mat-option.mat-selected {
+    color: var(--primary-green-light) !important;
+}
+
 .mat-dialog-container {
     padding      : 0% !important;
     border-radius: 15px !important;
     overflow     : hidden !important;
-    background   : #212121 !important;
+    // background   : #212121 !important;
     color        : var(--text-white) !important;
 }
 

@@ -26,11 +26,12 @@
     .mat-form-field-appearance-outline .mat-form-field-flex {
         border       : 2px solid var(--primary-green-light);
         border-radius: 15px !important;
+        color: #000 !important;
     }
 
     .mat-form-field-disabled {
         .mat-input-element:disabled {
-            color: var(--text-white) !important;
+            // color: var(--text-white) !important;
         }
     }
 }
@@ -39,7 +40,7 @@
     margin     : 1.5rem 2rem 1.5rem 1.5rem;
     font-size  : 15px;
     font-weight: 500;
-    color      : var(--text-white);
+    // color      : var(--text-white);
 }
 
 #wrapper {
@@ -170,7 +171,9 @@
             margin-block: 2rem;
 
             .add-section {
-                background     : #00000030;
+                // background     : #00000030;
+                background     : #bababa30;
+                color: var(--primary-green-clr);
                 border-radius  : 10px;
                 border         : 1px dashed var(--primary-green-clr);
                 display        : flex;
@@ -208,8 +211,10 @@
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr;
                     padding        : 13px;
-                    background     : #00000030;
-
+                    // background     : #00000030;
+                    background: #cdcdcd30;
+                    color: #000;
+                
                     &:first-child {
                         border-radius: 10px 10px 0 0;
                     }
@@ -234,7 +239,7 @@
             }
 
             input.mat-input-element::placeholder {
-                color: #fff !important;
+                // color: #fff !important;
             }
         }
     }
