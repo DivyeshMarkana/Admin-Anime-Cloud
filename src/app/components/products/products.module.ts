@@ -11,6 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 import { AddProductComponent } from './add-product/add-product.component';
@@ -43,6 +45,7 @@ const routes: Route[] = [
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSlideToggleModule,
     MatSelectModule,
     MatExpansionModule,
     RouterModule.forChild(routes)

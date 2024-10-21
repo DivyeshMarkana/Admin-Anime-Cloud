@@ -45,6 +45,15 @@ body {
     margin: 0 !important;
 }
 
+
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb {
+    background-color: var(--primary-green-clr) !important;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+    background-color: var(--primary-green-light) !important;
+}
+
 // .mat-form-field-outline-start {
 //     // border-color: var(--primary-green-light);
 //     // border-radius: 15px !important;
