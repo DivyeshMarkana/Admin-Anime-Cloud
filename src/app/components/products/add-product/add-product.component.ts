@@ -35,7 +35,9 @@ export class AddProductComponent implements OnInit {
   groups = [
     'Recommendation',
     'Latest',
+    'Trending',
     'Most Popular',
+    'Landing Page',
   ]
   STORAGE = getStorage();
 
