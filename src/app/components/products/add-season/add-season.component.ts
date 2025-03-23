@@ -63,7 +63,7 @@ export class AddSeasonComponent implements OnInit {
     console.log(this.data);
     if (this.data) {
       this.poster = this.data.poster;
-      if(!this.isNewSeason){
+      if (!this.isNewSeason) {
         this.episodes = this.data.episodes;
       }
       console.log(this.episodes);
@@ -229,7 +229,7 @@ export class AddSeasonComponent implements OnInit {
     });
   }
 
-  sortEpisodes(array){
+  sortEpisodes(array) {
     array.sort((a, b) => a.episodeNumber - b.episodeNumber);
   }
 
@@ -240,7 +240,7 @@ export class AddSeasonComponent implements OnInit {
       title: this.episodeForm.value.title.trim(),
       url: this.episodeForm.value.url.trim(),
       fileId: 'vid_111',
-      isFiller : this.episodeForm.value.isFiller
+      isFiller: this.episodeForm.value.isFiller
     }
 
     if (this.episodes.length > 0) {
@@ -266,45 +266,56 @@ export class AddSeasonComponent implements OnInit {
   }
 
 
-  editEpiSode(episode){
+  editEpiSode(episode) {
     this.isShow = true;
     this.isEditEpisode = true;
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+
     this.episodeForm.patchValue({
       title: episode.title.trim() ?? '',
       episodeNumber: episode.episodeNumber ?? '',
       fileId: 'vid_111',
-      url: episode.url.trim() ?? '', 
+      url: episode.url.trim() ?? '',
       isFiller: episode.isFiller ?? false
     });
 
+    setTimeout(() => {
+
+      const form = document.getElementById('form') as HTMLFormElement;
+
+      form.scrollIntoView({
+        behavior: 'smooth'
+      })
+
+      // window.scroll({
+      //   top: 0,
+      //   left: 0,
+      //   behavior: 'smooth'
+      // });
+    }, 100);
+
   }
 
-  saveEpisode(){
+  saveEpisode() {
     this.episodes.map(x => {
-        if(x.episodeNumber == this.episodeForm.value.episodeNumber){
-          x['episodeNumber'] = this.episodeForm.value.episodeNumber;
-          x['url'] = this.episodeForm.value.url.trim();
-          x['title'] = this.episodeForm.value.title.trim();
-          x['fileId'] = this.episodeForm.value.fileId;
-          x['isFiller'] = this.episodeForm.value.isFiller;
-          // x = this.episodeForm.value;
+      if (x.episodeNumber == this.episodeForm.value.episodeNumber) {
+        x['episodeNumber'] = this.episodeForm.value.episodeNumber;
+        x['url'] = this.episodeForm.value.url.trim();
+        x['title'] = this.episodeForm.value.title.trim();
+        x['fileId'] = this.episodeForm.value.fileId;
+        x['isFiller'] = this.episodeForm.value.isFiller;
+        // x = this.episodeForm.value;
 
-          console.log('sssss');
-          
-        }
+        console.log('sssss');
+
+      }
     });
     this.sortEpisodes(this.episodes);
     this.isEditEpisode = false;
     this.discardEpisodeChange();
-    
+
   }
 
-  deleteEpisode(index){
+  deleteEpisode(index) {
     this.episodes.splice(index, 1);
   }
 
