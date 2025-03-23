@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   }
 
   form: FormGroup = new FormGroup({
-    username: new FormControl('dev@delight.com'),
-    password: new FormControl('Dev@123'),
+    username: new FormControl(''),
+    password: new FormControl(''),
   })
 
   login() {
