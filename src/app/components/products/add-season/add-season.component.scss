@@ -26,7 +26,7 @@
     .mat-form-field-appearance-outline .mat-form-field-flex {
         border       : 2px solid var(--primary-green-light);
         border-radius: 15px !important;
-        color: #000 !important;
+        color        : #000 !important;
     }
 
     .mat-form-field-disabled {
@@ -36,10 +36,15 @@
     }
 }
 
+textarea.mat-input-element {
+    min-height: 100px;
+    color     : #000;
+}
+
 .label {
-    margin     : 1.5rem 2rem 1.5rem 1.5rem;
-    font-size  : 15px;
-    font-weight: 500;
+    margin        : 1.5rem 2rem 1.5rem 1.5rem;
+    font-size     : 15px;
+    font-weight   : 500;
     // color      : var(--text-white);
 }
 
@@ -173,7 +178,7 @@
             .add-section {
                 // background     : #00000030;
                 background     : #bababa30;
-                color: var(--primary-green-clr);
+                color          : var(--primary-green-clr);
                 border-radius  : 10px;
                 border         : 1px dashed var(--primary-green-clr);
                 display        : flex;
@@ -208,13 +213,13 @@
                     // justify-content: space-between;
                     // align-items    : center;
 
-                    display: grid;
+                    display              : grid;
                     grid-template-columns: 1fr 1fr 1fr;
-                    padding        : 13px;
+                    padding              : 13px;
                     // background     : #00000030;
-                    background: #cdcdcd30;
-                    color: #000;
-                
+                    background           : #cdcdcd30;
+                    color                : #000;
+
                     &:first-child {
                         border-radius: 10px 10px 0 0;
                     }

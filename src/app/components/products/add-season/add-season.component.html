@@ -32,7 +32,8 @@
                     Season details
                 </div>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="Enter season number" [formControlName]="'season'" [readonly]="!isNewSeason" 
+                    <input matInput placeholder="Enter season number" [formControlName]="'season'"
+                        [readonly]="!isNewSeason"
                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </mat-form-field>
 
@@ -55,32 +56,34 @@
             </div>
 
             <ng-container *ngIf="episodes && episodes.length === 0 && !isShow">
-                <div class="add-section" (click)="isShow = true">
+                <div class="add-section" (click)="add()">
                     <mat-icon>add</mat-icon>
                     <div class="add-txt">Add Episode</div>
                 </div>
             </ng-container>
 
             <ng-container *ngIf="episodes.length > 0">
-                <div class="add-btn" (click)="isShow = true">
-                    <button class="btn">Add episode</button>
+                <div class="add-btn" (click)="add()">
+                    <button class=" btn">Add episode</button>
                 </div>
             </ng-container>
 
             <ng-container *ngIf="isShow">
                 <div class="" style="display: flex; justify-content: space-between; align-items: center;">
-                    <form [formGroup]="episodeForm" id="form" style="display: flex; flex-direction: column; width: 80%;">
+                    <form [formGroup]="episodeForm" id="form"
+                        style="display: flex; flex-direction: column; width: 80%;">
 
                         <div style="display: flex; align-items: center;">
                             <mat-form-field appearance="outline" style="">
-                                <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'" [readOnly]="isEditEpisode"
-                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'"
+                                    [readOnly]="isEditEpisode"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                             </mat-form-field>
-    
+
                             <mat-form-field appearance="outline" style="margin-left: 1rem;">
                                 <input matInput placeholder="Enter title" [formControlName]="'title'">
                             </mat-form-field>
-    
+
                             <mat-form-field appearance="outline" style="margin-left: 1rem;">
                                 <input matInput placeholder="Enter URL" [formControlName]="'url'">
                             </mat-form-field>
@@ -91,17 +94,24 @@
                             <span style="color: #000; font-weight: 500; margin-right: 15px;">Filler: </span>
                             <mat-slide-toggle formControlName="isFiller" color="primary"></mat-slide-toggle>
                         </div>
+
+                        <mat-form-field>
+                            <mat-label>Textarea</mat-label>
+                            <textarea matInput [formControlName]="'embededHTML'"></textarea>
+                        </mat-form-field>
                     </form>
 
                     <div style="margin-top: 1rem;">
                         <ng-container *ngIf="!isEditEpisode">
-                            <button mat-flat-button color="primary" [disabled]="!episodeForm.valid" (click)="addEpisode()">
+                            <button mat-flat-button color="primary" [disabled]="!episodeForm.valid"
+                                (click)="addEpisode()">
                                 Save
                             </button>
                         </ng-container>
 
                         <ng-container *ngIf="isEditEpisode">
-                            <button mat-flat-button color="primary" [disabled]="!episodeForm.valid" (click)="saveEpisode()">
+                            <button mat-flat-button color="primary" [disabled]="!episodeForm.valid"
+                                (click)="saveEpisode()">
                                 Update
                             </button>
                         </ng-container>
@@ -131,7 +141,8 @@
                         </div>
                     </div>
 
-                    <div class="episode-item" *ngFor="let episode of episodes; let i = index" [ngClass]="episode.isFiller ? 'filler-ep' : ''">
+                    <div class="episode-item" *ngFor="let episode of episodes; let i = index"
+                        [ngClass]="episode.isFiller ? 'filler-ep' : ''">
                         <div>
                             #{{episode.episodeNumber}} {{episode.title}}
                         </div>
@@ -142,7 +153,8 @@
 
                         <div style="place-self: end;">
                             <mat-icon color="primary" (click)="editEpiSode(episode)" class="edit-btn">edit</mat-icon>
-                            <mat-icon color="warn" (click)="deleteEpisode(i)" style="margin-left: 1rem;" class="dlt-btn">delete</mat-icon>
+                            <mat-icon color="warn" (click)="deleteEpisode(i)" style="margin-left: 1rem;"
+                                class="dlt-btn">delete</mat-icon>
                         </div>
                     </div>
                 </div>

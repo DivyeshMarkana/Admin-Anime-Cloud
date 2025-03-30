@@ -56,7 +56,8 @@ export class AddSeasonComponent implements OnInit {
     episodeNumber: new FormControl(),
     fileId: new FormControl('vid_111'),
     url: new FormControl(''),
-    isFiller: new FormControl(false)
+    isFiller: new FormControl(false),
+    embededHTML: new FormControl('')
   })
 
   ngOnInit(): void {
@@ -218,6 +219,13 @@ export class AddSeasonComponent implements OnInit {
 
   }
 
+  add() {
+    this.isShow = true;
+    this.episodeForm.patchValue({
+      episodeNumber: this.episodes.length + 1
+    })
+  }
+
 
   discardEpisodeChange() {
     this.isShow = false;
@@ -225,7 +233,8 @@ export class AddSeasonComponent implements OnInit {
     this.episodeForm.patchValue({
       title: '',
       url: '',
-      episodeNumber: ''
+      episodeNumber: '',
+      embededHTML: ''
     });
   }
 
@@ -240,7 +249,8 @@ export class AddSeasonComponent implements OnInit {
       title: this.episodeForm.value.title.trim(),
       url: this.episodeForm.value.url.trim(),
       fileId: 'vid_111',
-      isFiller: this.episodeForm.value.isFiller
+      isFiller: this.episodeForm.value.isFiller,
+      embededHTML: this.episodeForm.value.embededHTML
     }
 
     if (this.episodes.length > 0) {
@@ -275,7 +285,8 @@ export class AddSeasonComponent implements OnInit {
       episodeNumber: episode.episodeNumber ?? '',
       fileId: 'vid_111',
       url: episode.url.trim() ?? '',
-      isFiller: episode.isFiller ?? false
+      isFiller: episode.isFiller ?? false,
+      embededHTML: episode.embededHTML ?? '',
     });
 
     setTimeout(() => {
@@ -303,6 +314,7 @@ export class AddSeasonComponent implements OnInit {
         x['title'] = this.episodeForm.value.title.trim();
         x['fileId'] = this.episodeForm.value.fileId;
         x['isFiller'] = this.episodeForm.value.isFiller;
+        x['embededHTML'] = this.episodeForm.value.embededHTML;
         // x = this.episodeForm.value;
 
         console.log('sssss');
