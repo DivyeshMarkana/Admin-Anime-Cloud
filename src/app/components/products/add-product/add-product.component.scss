@@ -39,7 +39,7 @@
     .mat-form-field-appearance-outline .mat-form-field-flex {
         border       : 2px solid var(--primary-green-light);
         border-radius: 15px !important;
-        color: #000 !important;
+        color        : #000 !important;
     }
 }
 
@@ -188,12 +188,13 @@
                 .mat-form-field-wrapper {
                     padding: 0 !important;
                 }
-                .mat-form-field-appearance-outline .mat-form-field-outline{
+
+                .mat-form-field-appearance-outline .mat-form-field-outline {
                     top: 0 !important;
                 }
 
             }
-            
+
             .mat-form-field-appearance-outline .mat-form-field-label {
                 margin-top: 0 !important;
             }
@@ -212,6 +213,7 @@
         .action-btn {
             width        : 100%;
             border-radius: 15px;
+            padding      : 5px !important;
         }
 
         .save-btn {

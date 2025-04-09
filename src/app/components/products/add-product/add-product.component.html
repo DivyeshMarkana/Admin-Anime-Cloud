@@ -43,15 +43,15 @@
             <mat-form-field appearance="outline">
                 <mat-label>Groups</mat-label>
                 <mat-select [formControl]="group" multiple>
-                  <mat-select-trigger>
-                    {{group.value ? group.value[0] : ''}}
-                    <span *ngIf="group.value?.length > 1" class="example-additional-selection">
-                      (+{{group.value.length - 1}} {{group.value?.length === 2 ? 'other' : 'others'}})
-                    </span>
-                  </mat-select-trigger>
-                  <mat-option *ngFor="let group of groups" [value]="group">{{group}}</mat-option>
+                    <mat-select-trigger>
+                        {{group.value ? group.value[0] : ''}}
+                        <span *ngIf="group.value?.length > 1" class="example-additional-selection">
+                            (+{{group.value.length - 1}} {{group.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let group of groups" [value]="group">{{group}}</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </form>
     </div>
 
@@ -64,6 +64,8 @@
             [ngClass]="this.photo['src'] !== '' && form.valid ? 'active-btn' : 'save-btn'" [color]="'primary'"
             (click)="submit()">
             <span *ngIf="!loading">Save</span>
+
+            <span *ngIf="loading" class="loader"></span>
             <!-- <img src="assets/images/avatars/spinner.gif" *ngIf="loading" alt="loading" class="h-full"> -->
         </button>
         <!-- <button mat-flat-button class="action-btn"

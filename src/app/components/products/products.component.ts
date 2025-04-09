@@ -33,6 +33,12 @@ export interface UserData {
     height: 0px !important;
 }
 
+.mat-column-name {
+  width: 220px;
+  overflow:hidden;
+  padding-right: 10px;
+}
+
 tr.example-element-row:not(.example-expanded-row):hover {
     background: whitesmoke;
 }
@@ -84,7 +90,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 })
 export class ProductsComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['details', 'poster', 'name', 'id', 'actions'];
+  displayedColumns: string[] = ['details', 'poster', 'name', 'id', 'groups', 'isPublish', 'actions'];
   // displayedChildColumns: string[] = ['subDetails', 'poster', 'season', 'teaser', 'id', 'actions'];
   displayedChildColumns: string[] = ['poster', 'season', 'teaser', 'id', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -144,7 +150,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
 
   expandRow(row) {
     this.expandedElement = this.expandedElement === row ? null : row;
-    if(this.expandedElement === row){
+    if (this.expandedElement === row) {
       this.getAnimeSeasons(row.id);
     }
   }
@@ -200,7 +206,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
         this.seasons = data;
       });
 
-      
+
       this.childDataSource = new MatTableDataSource(this.seasons);
       this.change.detectChanges();
     })
@@ -277,7 +283,7 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     ref.componentInstance.isNewSeason = true;
 
     ref.afterClosed().subscribe(result => {
-      if(result != ''){
+      if (result != '') {
         this.getAnimeSeasons(anime.id);
       }
     });
@@ -297,9 +303,35 @@ export class ProductsComponent implements OnInit, AfterViewInit {
     ref.componentInstance.isNewSeason = false;
 
     ref.afterClosed().subscribe(result => {
-      if(result != ''){
+      if (result != '') {
         this.getAnimeSeasons(result);
       }
     });
+  }
+
+  logg(event, row) {
+    console.log(event);
+    console.log(row);
+
+  }
+
+  updateStatus(status, anime) {
+    const params = {
+      name: anime.name,
+      poster: anime.poster,
+      groups: anime.groups,
+      isPublish: status
+    }
+    console.log(params);
+    // const databaseInstance = collection(this.firestore, 'anime');
+
+    const dataToUpdate = doc(this.firestore, 'anime', anime['id']);
+
+    updateDoc(dataToUpdate, params).then(() => {
+    }).catch((err) => {
+      alert(err.message)
+    })
+
+
   }
 }

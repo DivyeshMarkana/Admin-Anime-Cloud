@@ -69,11 +69,12 @@
             </ng-container>
 
             <ng-container *ngIf="isShow">
-                <div class="" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="" id="scroll-here"
+                    style="display: flex; justify-content: space-between; align-items: end; flex-direction: column;">
                     <form [formGroup]="episodeForm" id="form"
-                        style="display: flex; flex-direction: column; width: 80%;">
+                        style="display: flex; flex-direction: column; width: 100%;">
 
-                        <div style="display: flex; align-items: center;">
+                        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
                             <mat-form-field appearance="outline" style="">
                                 <input matInput placeholder="Enter episode number" [formControlName]="'episodeNumber'"
                                     [readOnly]="isEditEpisode"
@@ -84,20 +85,19 @@
                                 <input matInput placeholder="Enter title" [formControlName]="'title'">
                             </mat-form-field>
 
-                            <mat-form-field appearance="outline" style="margin-left: 1rem;">
+                            <!-- <mat-form-field appearance="outline" style="margin-left: 1rem;">
                                 <input matInput placeholder="Enter URL" [formControlName]="'url'">
-                            </mat-form-field>
+                            </mat-form-field> -->
 
-                        </div>
-
-                        <div style="display: flex; align-items: center;">
-                            <span style="color: #000; font-weight: 500; margin-right: 15px;">Filler: </span>
-                            <mat-slide-toggle formControlName="isFiller" color="primary"></mat-slide-toggle>
+                            <div style="display: flex; align-items: center;">
+                                <span style="color: #000; font-weight: 500; margin-right: 15px;">Filler: </span>
+                                <mat-slide-toggle formControlName="isFiller" color="primary"></mat-slide-toggle>
+                            </div>
                         </div>
 
                         <mat-form-field>
                             <mat-label>Textarea</mat-label>
-                            <textarea matInput [formControlName]="'embededHTML'"></textarea>
+                            <textarea [rows]="5" matInput [formControlName]="'embededHTML'"></textarea>
                         </mat-form-field>
                     </form>
 
@@ -132,9 +132,12 @@
                             Title
                         </div>
 
-                        <div>
-                            URL
+                        <div style="text-align: center;">
+                            Embeded
                         </div>
+                        <!-- <div>
+                            URL
+                        </div> -->
 
                         <div style="place-self: end;">
                             Actions
@@ -147,9 +150,21 @@
                             #{{episode.episodeNumber}} {{episode.title}}
                         </div>
 
-                        <div style="max-width: 300px; overflow: hidden;">
+                        <!-- <div style="max-width: 300px; overflow: hidden;">
                             {{episode.url}}
-                        </div>
+                        </div> -->
+
+                        <ng-container *ngIf="episode.embededHTML">
+                            <div style="max-width: 300px; overflow: hidden;">
+                                {{episode.embededHTML}}
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="!episode.embededHTML">
+                            <div style="max-width: 300px; overflow: hidden; text-align: center;">
+                                Not available
+                            </div>
+                        </ng-container>
 
                         <div style="place-self: end;">
                             <mat-icon color="primary" (click)="editEpiSode(episode)" class="edit-btn">edit</mat-icon>
@@ -165,14 +180,12 @@
 
 
     <mat-dialog-actions class="">
-        <!-- <button mat-flat-button [color]="'warn'" mat-dialog-close [color]="'accent'">
-            Cancel
-        </button> -->
-        <button mat-flat-button class="action-btn" [disabled]="this.photo['src'] === '' || !form.valid"
+        <button mat-flat-button class="action-btn" [disabled]="this.photo['src'] === '' || !form.valid || submitting"
             [ngClass]="this.photo['src'] !== '' && form.valid ? 'active-btn' : 'save-btn'" [color]="'primary'"
             (click)="submit()">
-            <span *ngIf="!loading">Save</span>
-            <!-- <img src="assets/images/avatars/spinner.gif" *ngIf="loading" alt="loading" class="h-full"> -->
+            <span *ngIf="!submitting">Save</span>
+            <span *ngIf="submitting" class="loader"></span>
+
         </button>
     </mat-dialog-actions>
 </div>

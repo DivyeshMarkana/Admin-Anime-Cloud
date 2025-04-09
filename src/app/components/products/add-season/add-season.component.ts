@@ -38,6 +38,8 @@ export class AddSeasonComponent implements OnInit {
   poster = null
   isNewSeason;
   STORAGE = getStorage();
+  submitting = false;
+
 
   private GUID;
 
@@ -129,6 +131,7 @@ export class AddSeasonComponent implements OnInit {
   }
 
   submit() {
+    this.submitting = true;
     if (this.photo['src'] !== '' && !this.photo['src'].includes('https')) {
       console.log('has photo');
 
@@ -156,13 +159,17 @@ export class AddSeasonComponent implements OnInit {
 
               updateDoc(dataToUpdate, params).then(() => {
                 this.dialogRef.close();
+                this.submitting = false;
               }).catch((err) => {
+                this.submitting = false;
                 alert(err.message)
               })
             } else {
               addDoc(databaseInstance, params).then(() => {
+                this.submitting = false;
                 this.dialogRef.close();
               }).catch((err) => {
+                this.submitting = false;
                 alert(err.message)
               })
             }
@@ -187,13 +194,17 @@ export class AddSeasonComponent implements OnInit {
 
         updateDoc(dataToUpdate, params).then(() => {
           this.dialogRef.close(this.data.masterId);
+          this.submitting = false;
         }).catch((err) => {
+          this.submitting = false;
           alert(err.message)
         })
       } else {
         addDoc(databaseInstance, params).then(() => {
           this.dialogRef.close(this.data.id);
+          this.submitting = false;
         }).catch((err) => {
+          this.submitting = false;
           alert(err.message)
         })
       }
@@ -222,7 +233,7 @@ export class AddSeasonComponent implements OnInit {
   add() {
     this.isShow = true;
     this.episodeForm.patchValue({
-      episodeNumber: this.episodes.length + 1
+      episodeNumber: (this.episodes.length + 1).toString()
     })
   }
 
@@ -291,9 +302,9 @@ export class AddSeasonComponent implements OnInit {
 
     setTimeout(() => {
 
-      const form = document.getElementById('form') as HTMLFormElement;
+      const scrollElement = document.getElementById('scroll-here') as HTMLFormElement;
 
-      form.scrollIntoView({
+      scrollElement.scrollIntoView({
         behavior: 'smooth'
       })
 

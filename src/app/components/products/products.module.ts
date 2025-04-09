@@ -10,8 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatSelectModule} from '@angular/material/select';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -44,6 +45,7 @@ const routes: Route[] = [
     MatDialogModule,
     MatIconModule,
     FormsModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatSelectModule,

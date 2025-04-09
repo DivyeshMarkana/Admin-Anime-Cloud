@@ -31,7 +31,7 @@ export class AddProductComponent implements OnInit {
     type: ''
   }
 
-  data:any = null;
+  data: any = null;
   groups = [
     'Recommendation',
     'Latest',
@@ -40,6 +40,7 @@ export class AddProductComponent implements OnInit {
     'Landing Page',
   ]
   STORAGE = getStorage();
+
 
   private GUID;
 
@@ -118,7 +119,7 @@ export class AddProductComponent implements OnInit {
   }
 
   submit() {
-
+    this.loading = true;
     if (this.photo['src'] !== '' && !this.photo['src'].includes('https')) {
       console.log('has photo');
 
@@ -143,13 +144,17 @@ export class AddProductComponent implements OnInit {
 
               updateDoc(dataToUpdate, params).then(() => {
                 this.dialogRef.close();
+                this.loading = false;
               }).catch((err) => {
+                this.loading = false;
                 alert(err.message)
               })
             } else {
               addDoc(databaseInstance, params).then(() => {
                 this.dialogRef.close();
+                this.loading = false;
               }).catch((err) => {
+                this.loading = false;
                 alert(err.message)
               })
             }
@@ -171,13 +176,17 @@ export class AddProductComponent implements OnInit {
 
         updateDoc(dataToUpdate, params).then(() => {
           this.dialogRef.close();
+          this.loading = false;
         }).catch((err) => {
+          this.loading = false;
           alert(err.message)
         })
       } else {
         addDoc(databaseInstance, params).then(() => {
           this.dialogRef.close();
+          this.loading = false;
         }).catch((err) => {
+          this.loading = false;
           alert(err.message)
         })
       }

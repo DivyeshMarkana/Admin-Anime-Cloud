@@ -37,8 +37,9 @@
 }
 
 textarea.mat-input-element {
-    min-height: 100px;
-    color     : #000;
+    // min-height: 100px;
+    // min-height: 100px;
+    color: #000;
 }
 
 .label {
@@ -197,11 +198,13 @@ textarea.mat-input-element {
                 display        : flex;
                 justify-content: end;
                 margin-bottom  : 1rem;
+                cursor         : pointer;
 
                 .btn {
                     color     : var(--primary-green-clr);
                     background: transparent;
                     border    : none;
+                    cursor    : pointer;
                 }
             }
 
@@ -239,11 +242,17 @@ textarea.mat-input-element {
         #form {
             margin-top: 2.5rem;
 
+            .mat-form-field-appearance-outline .mat-form-field-wrapper {
+                padding: 0 !important;
+                margin : 0 !important;
+            }
+
             .mat-form-field {
                 width: 100% !important;
 
                 .mat-form-field-wrapper {
                     padding: 0 !important;
+                    margin : 0 !important;
                 }
             }
 
@@ -261,6 +270,7 @@ textarea.mat-input-element {
         .action-btn {
             width        : 100%;
             border-radius: 15px;
+            padding      : 5px;
         }
 
         .save-btn {
